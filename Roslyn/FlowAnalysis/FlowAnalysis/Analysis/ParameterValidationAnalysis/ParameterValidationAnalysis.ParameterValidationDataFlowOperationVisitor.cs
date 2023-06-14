@@ -213,7 +213,7 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.DataFlow.ParameterValidationAnalys
                 => EqualsHelper(value1, value2);
 
             #region Visit overrides
-            public override ParameterValidationAbstractValue Visit(IOperation operation, object? argument)
+            public override ParameterValidationAbstractValue Visit(IOperation? operation, object? argument)
             {
                 var value = base.Visit(operation, argument);
                 if (operation != null)

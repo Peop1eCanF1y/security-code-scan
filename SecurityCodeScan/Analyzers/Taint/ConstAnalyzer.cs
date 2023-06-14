@@ -104,7 +104,7 @@ namespace SecurityCodeScan.Analyzers.Taint
 
                                 if (value.Kind == OperationKind.ArrayCreation &&
                                     value is IArrayCreationOperation arrayValue &&
-                                    arrayValue.Initializer?.Children.All(x => x.ConstantValue.HasValue) == true)
+                                    arrayValue.Initializer?.ChildOperations.All(x => x.ConstantValue.HasValue) == true)
                                 {
                                     return true;
                                 }

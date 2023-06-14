@@ -738,7 +738,7 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.DataFlow
                 if (branch.BranchValue.Type?.SpecialType == SpecialType.System_Boolean &&
                     branch.BranchValue.ConstantValue.HasValue)
                 {
-                    var alwaysTrue = (bool)branch.BranchValue.ConstantValue.Value;
+                    var alwaysTrue = (bool?)branch.BranchValue.ConstantValue.Value ?? false;
                     if (alwaysTrue && branch.ControlFlowConditionKind == ControlFlowConditionKind.WhenFalse ||
                         !alwaysTrue && branch.ControlFlowConditionKind == ControlFlowConditionKind.WhenTrue)
                     {
@@ -1132,7 +1132,7 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.DataFlow
             }
         }
 
-        protected bool TryGetPointsToAbstractValueAtEntryBlockEnd(AnalysisEntity analysisEntity, out PointsToAbstractValue pointsToAbstractValue)
+        protected bool TryGetPointsToAbstractValueAtEntryBlockEnd(AnalysisEntity analysisEntity, out PointsToAbstractValue? pointsToAbstractValue)
         {
             Debug.Assert(CurrentBasicBlock.Kind == BasicBlockKind.Entry);
             RoslynDebug.Assert(DataFlowAnalysisContext.PointsToAnalysisResult != null);
@@ -1572,7 +1572,7 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.DataFlow
                             switch (kindStr)
                             {
                                 case "NegatedPattern":
-                                    if (isPatternOperation.Pattern.Children.FirstOrDefault() is IPatternOperation negatedPattern)
+                                    if (isPatternOperation.Pattern.ChildOperations.FirstOrDefault() is IPatternOperation negatedPattern)
                                     {
                                         if (negatedPattern is IConstantPatternOperation negatedConstantPattern)
                                         {
@@ -2679,7 +2679,7 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.DataFlow
             return ValueDomain.UnknownOrMayBeValue;
         }
 
-        public override TAbstractAnalysisValue Visit(IOperation operation, object? argument)
+        public override TAbstractAnalysisValue Visit(IOperation? operation, object? argument)
         {
             if (operation != null)
             {
@@ -2735,7 +2735,7 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.DataFlow
 
         public override TAbstractAnalysisValue DefaultVisit(IOperation operation, object? argument)
         {
-            return VisitArray(operation.Children, argument);
+            return VisitArray(operation.ChildOperations, argument);
         }
 
         public override TAbstractAnalysisValue VisitSimpleAssignment(ISimpleAssignmentOperation operation, object? argument)

@@ -112,7 +112,7 @@ namespace SecurityCodeScan.Analyzers.Utils
 
         public override SyntaxNode GetMemberAccessNameNode(SyntaxNode node)
         {
-            if (node?.Kind() == SyntaxKind.SimpleMemberAccessExpression)
+            if (node?.IsKind(SyntaxKind.SimpleMemberAccessExpression) ?? false)
             {
                 return ((MemberAccessExpressionSyntax)node)?.Name;
             }
@@ -397,8 +397,8 @@ namespace SecurityCodeScan.Analyzers.Utils
 
         public override bool IsObjectCreationExpressionUnderFieldDeclaration(SyntaxNode node)
         {
-            return node                                                                      != null                                &&
-                   node.Kind()                                                               == SyntaxKind.ObjectCreationExpression &&
+            return node != null &&
+                   node.IsKind(SyntaxKind.ObjectCreationExpression) &&
                    node.AncestorsAndSelf().OfType<FieldDeclarationSyntax>().FirstOrDefault() != null;
         }
 
@@ -431,7 +431,7 @@ namespace SecurityCodeScan.Analyzers.Utils
 
         public override bool IsAttributeArgument(SyntaxNode node)
         {
-            return node?.Kind() == SyntaxKind.SimpleArgument;
+            return node?.IsKind(SyntaxKind.SimpleArgument) ?? false;
         }
 
         public override SyntaxNode GetAttributeArgumentNode(SyntaxNode node)

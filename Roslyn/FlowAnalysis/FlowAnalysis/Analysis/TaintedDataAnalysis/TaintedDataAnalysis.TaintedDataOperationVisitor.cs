@@ -173,7 +173,7 @@ namespace Analyzer.Utilities.FlowAnalysis.Analysis.TaintedDataAnalysis
                 // - instantiating an object with tainted data makes the new object tainted
 
                 List<TaintedDataAbstractValue>? taintedValues = null;
-                foreach (IOperation childOperation in operation.Children)
+                foreach (IOperation childOperation in operation.ChildOperations)
                 {
                     TaintedDataAbstractValue childValue = Visit(childOperation, argument);
                     if (childValue.Kind == TaintedDataAbstractValueKind.Tainted)
@@ -246,13 +246,13 @@ namespace Analyzer.Utilities.FlowAnalysis.Analysis.TaintedDataAnalysis
 
                 if (ret.Kind == TaintedDataAbstractValueKind.Tainted)
                 {
-                    foreach (var interpolation in operation.Children)
+                    foreach (var interpolation in operation.ChildOperations)
                     {
                         if (interpolation.Type != null)
                             throw new Exception($"interpolation.Type was not null but {interpolation.Type}");
 
                         bool shouldSanitize = true;
-                        foreach (var child in interpolation.Children)
+                        foreach (var child in interpolation.ChildOperations)
                         {
                             shouldSanitize = ShouldSanitizeConversion(SpecialType.System_String, child);
                             if (!shouldSanitize)
@@ -530,7 +530,7 @@ namespace Analyzer.Utilities.FlowAnalysis.Analysis.TaintedDataAnalysis
                 // Note this method is only called when interprocedural DFA is *NOT* performed.
                 if (operation.Parent is IInvocationOperation invocationOperation)
                 {
-                    Debug.Assert(!this.TryGetInterproceduralAnalysisResult(invocationOperation, out TaintedDataAnalysisResult _));
+                    Debug.Assert(!this.TryGetInterproceduralAnalysisResult(invocationOperation, out TaintedDataAnalysisResult? _));
 
                     if (this.CurrentAnalysisData.TryGetValue(analysisEntity, out TaintedDataAbstractValue? value))
                     {
