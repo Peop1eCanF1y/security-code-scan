@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Immutable;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Xml;
 using System.Xml.Linq;
@@ -168,7 +169,7 @@ namespace SecurityCodeScan.Analyzers
 
             CheckMainConfigAndLocations("validateRequest",
                                         "True",
-                                        v => 0 == String.Compare("true", v, StringComparison.OrdinalIgnoreCase),
+                                        v => 0 == string.Compare("true", v, StringComparison.OrdinalIgnoreCase),
                                         RuleValidateRequest,
                                         systemWeb,
                                         lastFoundElement,
@@ -181,7 +182,7 @@ namespace SecurityCodeScan.Analyzers
                                         "4.0",
                                         v =>
                                         {
-                                            if (!decimal.TryParse(v, out var version))
+                                            if (!decimal.TryParse(v, NumberStyles.Float, CultureInfo.InvariantCulture, out var version))
                                                 return true;
 
                                             return version >= 4.0M;
