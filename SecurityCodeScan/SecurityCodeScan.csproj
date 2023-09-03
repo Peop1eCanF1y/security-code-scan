@@ -70,7 +70,7 @@
   <Import Project="..\Roslyn\Workspaces\Workspaces.Utilities.projitems" Label="Shared" />
 
   <ItemGroup>
-    <PackageReference Update="Microsoft.CodeAnalysis" Version="4.6.0" />
+    <PackageReference Update="Microsoft.CodeAnalysis" Version="4.7.0" />
     <PackageReference Update="Microsoft.CodeAnalysis.Common" Version="4.7.0" />
     <PackageReference Update="Microsoft.CodeAnalysis.Workspaces.Common" Version="4.7.0" />
   </ItemGroup>
