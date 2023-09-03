@@ -10,6 +10,7 @@
   <ItemGroup>
     <PackageReference Include="AntiXSS" Version="4.3.0" />
     <PackageReference Include="CassandraCSharpDriver" Version="3.19.3" />
+    <PackageReference Include="EnterpriseLibrary.Common" Version="6.0.1304" />
     <PackageReference Include="EnterpriseLibrary.Data" Version="6.0.1304" />
     <PackageReference Include="EntityFramework" Version="6.4.4" />
     <PackageReference Include="fastJSON" Version="2.4.0.4" />
