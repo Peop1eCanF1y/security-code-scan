@@ -51,7 +51,7 @@ namespace Microsoft.CodeAnalysis.RulesetToEditorconfig
             var description = rulesetNode.Attribute(RuleSetDescriptionAttributeName)?.Value ?? Path.GetFileName(rulesetFilePath);
 
             var builder = new StringBuilder();
-            builder.AppendLine(@"# NOTE: Requires **VS2019 16.3** or later");
+            builder.AppendLine(@"# NOTE: Requires **VS2022 17.6.2 or later");
             builder.AppendLine();
             builder.AppendLine($@"# {name}");
             builder.AppendLine($@"# Description: {description}");

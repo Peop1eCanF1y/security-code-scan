@@ -31,7 +31,6 @@ public class ExternalFileAnalyzerTest
                                 if (diagnostic != null)
                                     Logger.LogMessage("Was: \"{0}\"", diagnostic.GetMessage());
                             });
-
         var compilation = new CompilationAnalysisContext(null,
                                                          null,
                                                          diagnosticReportMock.Object,

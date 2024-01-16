@@ -210,7 +210,7 @@ namespace Analyzer.Utilities
 
         public bool ContainsKey(K key)
         {
-            return TryGetValue(key, out V _);
+            return TryGetValue(key, out V? _);
         }
 
 #pragma warning disable CA1822
@@ -623,9 +623,9 @@ namespace Analyzer.Utilities
 
             public struct Enumerator
             {
-                private readonly Stack<AvlNode> _stack;
+                private readonly Stack<AvlNode>? _stack;
                 private Node? _next;
-                private Node _current;
+                private Node? _current;
 
                 public Enumerator(SmallDictionary<K, V> dict)
                     : this()
@@ -739,9 +739,9 @@ namespace Analyzer.Utilities
 
             public struct Enumerator
             {
-                private readonly Stack<AvlNode> _stack;
+                private readonly Stack<AvlNode>? _stack;
                 private Node? _next;
-                private Node _current;
+                private Node? _current;
 
                 public Enumerator(SmallDictionary<K, V> dict)
                     : this()
@@ -845,9 +845,9 @@ namespace Analyzer.Utilities
 
         public struct Enumerator
         {
-            private readonly Stack<AvlNode> _stack;
+            private readonly Stack<AvlNode>? _stack;
             private Node? _next;
-            private Node _current;
+            private Node? _current;
 
             public Enumerator(SmallDictionary<K, V> dict)
                 : this()

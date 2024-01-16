@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Security Code Scan (VS2019 and newer)")]
+[assembly: AssemblyTitle("Security Code Scan (VS2022 and newer)")]
 [assembly: AssemblyDescription("Security static code analyzer for .NET")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("https://github.com/security-code-scan/security-code-scan")]

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SQLite;
 using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
@@ -271,20 +273,20 @@ End Namespace
         [DataRow("new SqlDatabase(\"connectionString\").ExecuteScalar(new SqlConnection(\"\").BeginTransaction(), input, parameters)", true, "SCS0002")]
         [DataRow("new SqlDatabase(\"connectionString\").ExecuteScalar(new SqlConnection(\"\").BeginTransaction(), \"select\", parameters)", false, null)]
 
-        [DataRow("new SQLiteCommand()",                                                                              false, null)]
-        [DataRow("new SQLiteCommand(new SQLiteConnection())",                                                        false, null)]
-        [DataRow("new SQLiteCommand(input)",                                                                         true,  "SCS0002")]
-        [DataRow("new SQLiteCommand(\"select\")",                                                                    false, null)]
-        [DataRow("new SQLiteCommand(input, new SQLiteConnection())",                                                 true,  "SCS0002")]
-        [DataRow("new SQLiteCommand(\"select\", new SQLiteConnection())",                                            false, null)]
-        [DataRow("new SQLiteCommand(input, new SQLiteConnection(), new SQLiteConnection().BeginTransaction())",      true,  "SCS0002")]
-        [DataRow("new SQLiteCommand(\"select\", new SQLiteConnection(), new SQLiteConnection().BeginTransaction())", false, null)]
-        [DataRow("SQLiteCommand.Execute(input, SQLiteExecuteType.Reader, CommandBehavior.Default, null)",            true,  "SCS0002")]
-        [DataRow("SQLiteCommand.Execute(\"select\", SQLiteExecuteType.Reader, CommandBehavior.Default, null)",       false, null)]
-        [DataRow("SQLiteCommand.Execute(input, SQLiteExecuteType.Reader, null)",                                     true,  "SCS0002")]
-        [DataRow("SQLiteCommand.Execute(\"select\", SQLiteExecuteType.Reader, null)",                                false, null)]
-        [DataRow("new SQLiteDataAdapter(\"\", \"\")",                                                                false, null)]
-        [DataRow("new SQLiteDataAdapter(input, \"\")",                                                               true,  "SCS0002")]
+        [DataRow("new SQLiteCommand()",                                                                                    false, null)]
+        [DataRow("new SQLiteCommand(new SQLiteConnection())",                                                              false, null)]
+        [DataRow("new SQLiteCommand(input)",                                                                               true,  "SCS0002")]
+        [DataRow("new SQLiteCommand(\"select\")",                                                                          false, null)]
+        [DataRow("new SQLiteCommand(input, new SQLiteConnection())",                                                       true,  "SCS0002")]
+        [DataRow("new SQLiteCommand(\"select\", new SQLiteConnection())",                                                  false, null)]
+        [DataRow("new SQLiteCommand(input, new SQLiteConnection(), new SQLiteConnection().BeginTransaction())",            true,  "SCS0002")]
+        [DataRow("new SQLiteCommand(\"select\", new SQLiteConnection(), new SQLiteConnection().BeginTransaction())",       false, null)]
+        [DataRow("SQLiteCommand.Execute(input, SQLiteExecuteType.Reader, CommandBehavior.Default, connection: null)",      true,  "SCS0002")]
+        [DataRow("SQLiteCommand.Execute(\"select\", SQLiteExecuteType.Reader, CommandBehavior.Default, connection: null)", false, null)]
+        [DataRow("SQLiteCommand.Execute(input, SQLiteExecuteType.Reader, null)",                                           true,  "SCS0002")]
+        [DataRow("SQLiteCommand.Execute(\"select\", SQLiteExecuteType.Reader, null)",                                      false, null)]
+        [DataRow("new SQLiteDataAdapter(\"\", \"\")",                                                                      false, null)]
+        [DataRow("new SQLiteDataAdapter(input, \"\")",                                                                     true,  "SCS0002")]
 
         // Tests below are covered by SCS0002
         [DataRow("new SqlDataAdapter(new SqlCommand(input))", true, "SCS0002")]
@@ -347,7 +349,7 @@ Namespace sample
         Inherits Controller
 
         Public Sub Run(input As System.String, ParamArray parameters() As Object)
-            Dim temp = {sink}
+            Dim temp = {sink.Replace(":", ":=")}
         End Sub
     End Class
 End Namespace

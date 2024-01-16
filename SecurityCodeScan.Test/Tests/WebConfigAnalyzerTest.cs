@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -81,6 +82,7 @@ namespace SecurityCodeScan.Test
             var config = $@"
 <configuration>
     <system.web>
+        <pages viewStateEncryptionMode=""Always"" />
         {element}
     </system.web>
 </configuration>
@@ -92,7 +94,7 @@ namespace SecurityCodeScan.Test
                 Id      = WebConfigAnalyzer.RuleRequestValidationMode.Id,
                 Message = String.Format(WebConfigAnalyzer.RuleRequestValidationMode.MessageFormat.ToString(),
                                         path,
-                                        4,
+                                        5,
                                         expectedNode)
             };
 
@@ -135,13 +137,18 @@ namespace SecurityCodeScan.Test
         {
             var config = $@"
 <configuration>
+    <system.web>
+        <pages viewStateEncryptionMode=""Always"" />
+    </system.web>
     <location path=""about"">
         <system.web>
+            <pages viewStateEncryptionMode=""Always"" />  
             {element}
         </system.web>
     </location>
     <location path=""contact"">
         <system.web>
+            <pages viewStateEncryptionMode=""Always"" />  
             {element}
         </system.web>
     </location>
@@ -154,7 +161,7 @@ namespace SecurityCodeScan.Test
                 Id = WebConfigAnalyzer.RuleRequestValidationMode.Id,
                 Message = String.Format(WebConfigAnalyzer.RuleRequestValidationMode.MessageFormat.ToString(),
                                         path,
-                                        5,
+                                        9,
                                         expectedNode)
             };
             var expected2 = new
@@ -162,7 +169,7 @@ namespace SecurityCodeScan.Test
                 Id      = WebConfigAnalyzer.RuleRequestValidationMode.Id,
                 Message = String.Format(WebConfigAnalyzer.RuleRequestValidationMode.MessageFormat.ToString(),
                                         path,
-                                        10,
+                                        15,
                                         expectedNode)
             };
 

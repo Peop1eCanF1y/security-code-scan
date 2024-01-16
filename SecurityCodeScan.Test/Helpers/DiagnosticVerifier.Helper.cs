@@ -215,7 +215,7 @@ namespace SecurityCodeScan.Test.Helpers
             else if (version == new Version(4, 8, 0))
                 return ReferenceAssemblies.NetFramework.Net48.Default;
             else
-                return ReferenceAssemblies.NetFramework.Net452.Default;
+                return ReferenceAssemblies.NetFramework.Net472.Default;
         }
 
         /// <summary>

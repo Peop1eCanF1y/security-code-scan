@@ -761,9 +761,9 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.DataFlow.PointsToAnalysis
             }
 
             private PointsToAbstractValue VisitTypeCreationWithArgumentsAndInitializer<TOperation>(
-                TOperation operation,
-                object? argument,
-                Func<TOperation, object?, PointsToAbstractValue> baseVisit)
+                TOperation                                        operation,
+                object?                                           argument,
+                Func<TOperation, object?, PointsToAbstractValue?> baseVisit)
                 where TOperation : IOperation
             {
                 AbstractLocation location = AbstractLocation.CreateAllocationLocation(operation, operation.Type, DataFlowAnalysisContext);
@@ -780,7 +780,7 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.DataFlow.PointsToAnalysis
                 return VisitTypeCreationWithArgumentsAndInitializer(operation, argument, base.VisitObjectCreation);
             }
 
-            public override PointsToAbstractValue VisitDynamicObjectCreation(IDynamicObjectCreationOperation operation, object? argument)
+            public override PointsToAbstractValue? VisitDynamicObjectCreation(IDynamicObjectCreationOperation operation, object? argument)
             {
                 return VisitTypeCreationWithArgumentsAndInitializer(operation, argument, base.VisitDynamicObjectCreation);
             }
@@ -824,7 +824,7 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.DataFlow.PointsToAnalysis
                 return PointsToAbstractValue.Create(location, mayBeNull: false);
             }
 
-            public override PointsToAbstractValue VisitTypeParameterObjectCreation(ITypeParameterObjectCreationOperation operation, object? argument)
+            public override PointsToAbstractValue? VisitTypeParameterObjectCreation(ITypeParameterObjectCreationOperation operation, object? argument)
             {
                 return VisitTypeCreationWithArgumentsAndInitializer(operation, argument, base.VisitTypeParameterObjectCreation);
             }

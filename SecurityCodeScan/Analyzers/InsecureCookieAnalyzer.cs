@@ -21,11 +21,11 @@ namespace SecurityCodeScan.Analyzers
     [DiagnosticAnalyzer(LanguageNames.CSharp, LanguageNames.VisualBasic)]
     public class CookieAnalyzer : DiagnosticAnalyzer
     {
-        public const            string               DiagnosticIdSecure = "SCS0008";
-        private static readonly DiagnosticDescriptor RuleSecure         = LocaleUtil.GetDescriptor(DiagnosticIdSecure);
+        public const string DiagnosticIdSecure = "SCS0008";
+        private static readonly DiagnosticDescriptor RuleSecure = LocaleUtil.GetDescriptor(DiagnosticIdSecure);
 
-        public const            string               DiagnosticIdHttpOnly = "SCS0009";
-        private static readonly DiagnosticDescriptor RuleHttpOnly         = LocaleUtil.GetDescriptor(DiagnosticIdHttpOnly);
+        public const string DiagnosticIdHttpOnly = "SCS0009";
+        private static readonly DiagnosticDescriptor RuleHttpOnly = LocaleUtil.GetDescriptor(DiagnosticIdHttpOnly);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(RuleSecure, RuleHttpOnly);
 
